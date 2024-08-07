@@ -1,0 +1,22 @@
+BootStrap: docker
+From: nvcr.io/nvidia/pytorch:24.07-py3
+
+%post
+git clone git@github.com:nhorlava/nougat.git
+cd nougat
+python setup.py install
+
+%environment
+
+%files
+
+%runscript
+
+%labels
+  author David Carreto Fidalgo
+  version 1.0
+
+%help
+  The converted Docker image for NVIDIAs PyTorch (version 23.09).
+
+%test
