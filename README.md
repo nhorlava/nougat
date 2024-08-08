@@ -10,7 +10,7 @@
 
 </div>
 
-This is the official repository for Nougat, the academic document PDF parser that understands LaTeX math and tables.
+This is the fork of the official repository for Nougat, the academic document PDF parser that understands LaTeX math and tables.
 
 Project page: https://facebookresearch.github.io/nougat/
 
