@@ -226,6 +226,7 @@ def clean_text(text):
     # Define a regular expression pattern for sentence boundaries.
     # This pattern considers '.', '!', and '?' as sentence delimiters, followed by a space or end of string.
     text = text.strip()
+    text = re.sub(r'([ \t\n])\1+', r'\1', text)
     sentence_pattern = re.compile(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?|\!)\s')
     
     # Use the pattern to split the text into sentences.
@@ -244,6 +245,7 @@ def clean_text(text):
     
     cleaned_sentences = " ".join(cleaned_sentences)
     postprocess_sentences = postprocess(cleaned_sentences)
+    
     return postprocess_sentences
 
 

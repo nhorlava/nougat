@@ -170,13 +170,14 @@ def main():
         )
         # check if model output is faulty
         for j, output in enumerate(model_output["predictions"]):
+            actual_page_number = args.pages[page_num]
+            
             if page_num == 0:
                 logging.info(
                     "Processing file %s with %i pages"
                     % (datasets[file_index].name, datasets[file_index].size)
                 )
             page_num += 1
-            actual_page_number = args.pages[page_num]
             
             if output.strip() == "[MISSING_PAGE_POST]":
                 logging.warning(f"Re-reading page {actual_page_number} due to [MISSING_PAGE_POST].")
