@@ -21,6 +21,7 @@ from nougat.utils.device import move_to_device, default_batch_size
 from nougat.utils.checkpoint import get_checkpoint
 from nougat.postprocessing import markdown_compatible
 import pypdf
+from nougat.utils.standart_pdfreader import get_paper_content
 
 logging.basicConfig(level=logging.INFO)
 
@@ -175,20 +176,32 @@ def main():
                     % (datasets[file_index].name, datasets[file_index].size)
                 )
             page_num += 1
+            actual_page_number = args.pages[page_num]
+            
             if output.strip() == "[MISSING_PAGE_POST]":
+                logging.warning(f"Re-reading page {actual_page_number} due to [MISSING_PAGE_POST].")
+                
+                output = get_paper_content(datasets[file_index].name, page_number = actual_page_number)
+                if args.markdown:
+                    output = markdown_compatible(output)
                 # uncaught repetitions -- most likely empty page
-                predictions.append(f"\n\n[MISSING_PAGE_EMPTY:{page_num}]\n\n")
+                predictions.append(output)
             elif args.skipping and model_output["repeats"][j] is not None:
                 if model_output["repeats"][j] > 0:
                     # If we end up here, it means the output is most likely not complete and was truncated.
-                    logging.warning(f"Skipping page {page_num} due to repetitions.")
-                    predictions.append(f"\n\n[MISSING_PAGE_FAIL:{page_num}]\n\n")
+                    logging.warning(f"Re-reading page {actual_page_number} due to repetitions.")
+                    output = get_paper_content(datasets[file_index].name, page_number = actual_page_number)
+                    if args.markdown:
+                        output = markdown_compatible(output)
+                    predictions.append(output)
                 else:
+                    logging.warning(f"Re-reading page {actual_page_number} due to MISSING_PAGE_EMPTY.")
+                    output = get_paper_content(datasets[file_index].name, page_number = actual_page_number)
+                    if args.markdown:
+                        output = markdown_compatible(output)
+                    predictions.append(output)
                     # If we end up here, it means the document page is too different from the training domain.
                     # This can happen e.g. for cover pages.
-                    predictions.append(
-                        f"\n\n[MISSING_PAGE_EMPTY:{i*args.batchsize+j+1}]\n\n"
-                    )
             else:
                 if args.markdown:
                     output = markdown_compatible(output)
