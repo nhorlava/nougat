@@ -165,13 +165,13 @@ def main():
     file_index = 0
     page_num = 0
     for i, (sample, is_last_page) in enumerate(tqdm(dataloader)):
-        print(sample)
+        
         model_output = model.inference(
             image_tensors=sample, early_stopping=args.skipping
         )
         # check if model output is faulty
         for j, output in enumerate(model_output["predictions"]):
-            actual_page_number = args.pages[page_num]
+            actual_page_number = datasets[file_index].pages[page_num]
             
             if page_num == 0:
                 logging.info(
