@@ -171,7 +171,7 @@ def main():
         )
         # check if model output is faulty
         for j, output in enumerate(model_output["predictions"]):
-            actual_page_number = datasets[file_index].pages[page_num]
+            actual_page_number = int(datasets[file_index].pages[page_num])
             
             if page_num == 0:
                 logging.info(

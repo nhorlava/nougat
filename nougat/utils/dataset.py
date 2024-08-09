@@ -20,7 +20,7 @@ import orjson
 from torch.utils.data import Dataset
 from transformers.modeling_utils import PreTrainedModel
 from nougat.dataset.rasterize import rasterize_paper
-
+import numpy as np
 
 class ImageDataset(torch.utils.data.Dataset):
     """
@@ -86,8 +86,9 @@ class LazyDataset(Dataset):
         self.name = str(pdf)
         self.init_fn = partial(rasterize_paper, pdf, pages=pages)
         self.dataset = None
-        self.pages= pypdf.PdfReader(pdf).pages if pages is None else pages
         self.size = len(pypdf.PdfReader(pdf).pages) if pages is None else len(pages)
+        self.pages= np.arange(1, self.size+1) if pages is None else pages
+        
 
     def __len__(self):
         return self.size
