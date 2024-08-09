@@ -165,6 +165,7 @@ def main():
     file_index = 0
     page_num = 0
     for i, (sample, is_last_page) in enumerate(tqdm(dataloader)):
+        print(sample)
         model_output = model.inference(
             image_tensors=sample, early_stopping=args.skipping
         )
