@@ -181,7 +181,7 @@ def main():
             page_num += 1
             
             if output.strip() == "[MISSING_PAGE_POST]":
-                logging.warning(f"Re-reading page {actual_page_number} due to [MISSING_PAGE_POST].")
+                logging.warning(f"Re-reading page {actual_page_number+1} due to [MISSING_PAGE_POST].")
                 
                 output = get_paper_content(datasets[file_index].name, page_number = actual_page_number)
                 if args.markdown:
@@ -191,13 +191,13 @@ def main():
             elif args.skipping and model_output["repeats"][j] is not None:
                 if model_output["repeats"][j] > 0:
                     # If we end up here, it means the output is most likely not complete and was truncated.
-                    logging.warning(f"Re-reading page {actual_page_number} due to repetitions.")
+                    logging.warning(f"Re-reading page {actual_page_number+1} due to repetitions.")
                     output = get_paper_content(datasets[file_index].name, page_number = actual_page_number)
                     if args.markdown:
                         output = markdown_compatible(output)
                     predictions.append(output)
                 else:
-                    logging.warning(f"Re-reading page {actual_page_number} due to MISSING_PAGE_EMPTY.")
+                    logging.warning(f"Re-reading page {actual_page_number+1} due to MISSING_PAGE_EMPTY.")
                     output = get_paper_content(datasets[file_index].name, page_number = actual_page_number)
                     if args.markdown:
                         output = markdown_compatible(output)

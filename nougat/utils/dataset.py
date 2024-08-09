@@ -87,7 +87,7 @@ class LazyDataset(Dataset):
         self.init_fn = partial(rasterize_paper, pdf, pages=pages)
         self.dataset = None
         self.size = len(pypdf.PdfReader(pdf).pages) if pages is None else len(pages)
-        self.pages= np.arange(1, self.size+1) if pages is None else pages
+        self.pages= np.arange(self.size) if pages is None else pages
         
 
     def __len__(self):

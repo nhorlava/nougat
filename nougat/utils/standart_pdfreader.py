@@ -146,8 +146,8 @@ def get_paper_content(pdf_path, page_number:int = 0):
         pdfReaded = PyPDF2.PdfReader(pdfFileObj)
             
         # Create a boolean variable for image detection
-        
-        page= list([el for el in extract_pages(pdf_path, page_numbers = [page_number])])[0]
+       
+        page= [el for el in extract_pages(pdf_path, page_numbers = [page_number])][0]
         # We extract the pages from the PDF
         # for pagenum, page in enumerate(pages):
         
