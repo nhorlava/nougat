@@ -18,8 +18,8 @@ Original project page: https://facebookresearch.github.io/nougat/
 - Max Planck Institute for Research on Collective Goods
   
 <b> Key changes: </b>
-- for pages were original "nougat" tool produced "[MISSING_PAGE_*]" error, simpler OCR methods (e.g. `pytesseract` tool)  were used to recognize text.
-- additionally, the repo was containerized using "apptainer". The recipy is located at `container/apptainer/nougat.def`
+- for pages were the original "nougat" tool produced "[MISSING_PAGE_*]" error, simpler OCR methods (e.g. `pytesseract` tool)  were used to recognize text.
+- additionally, the repo was containerized using "apptainer". The recipe is located at `container/apptainer/nougat.def`
 
 <b> Example of running: </b>
 `apptainer exec $path_to_container nougat $path/to/directory -o output_directory --batchsize 1`
