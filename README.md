@@ -9,16 +9,20 @@
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Community%20Space-blue)](https://huggingface.co/spaces/ysharma/nougat)
 
 </div>
-
 This is the fork of the official repository for Nougat, the academic document PDF parser that understands LaTeX math and tables.
 Original project page: https://facebookresearch.github.io/nougat/
 
-<b> This fork is part of a collaborative project I am contributing to as an employee of the Max Planck Computing and Data Facility (MPCDF). The project involves the following organizations: </b>
-- Max Planck Computing and Data Facility (MPCDF)
+<b>This fork was modified as part of a collaborative project I am contributing to as an employee of the Max Planck Computing and Data Facility (MPCDF). The project involves the following organizations:</b>
+- <img 
+     src="https://github.com/user-attachments/assets/3c8d03a8-4a46-4485-837f-f57eb4fd7659" 
+     alt="MPCDF Logo" 
+     style="width: 20px; margin-right: 20px;"
+/> Max Planck Computing and Data Facility (MPCDF) 
 - Max Planck Institute for Research on Collective Goods
-  
+
+
 <b> Key changes: </b>
-- for pages were the original "nougat" tool produced "[MISSING_PAGE_*]" error, simpler OCR methods (e.g. `pytesseract` tool)  were used to recognize text.
+- for pages where the original "nougat" tool produced "[MISSING_PAGE_*]" error, simpler OCR methods (e.g. `pytesseract` tool)  were used to recognize text.
 - additionally, the repo was containerized using "apptainer". The recipe is located at `container/apptainer/nougat.def`
 
 <b> Example of running: </b>
@@ -83,39 +87,6 @@ $ nougat path/to/file.pdf -o output_directory -m 0.1.0-base
 In the output directory every PDF will be saved as a `.mmd` file, the lightweight markup language, mostly compatible with [Mathpix Markdown](https://github.com/Mathpix/mathpix-markdown-it) (we make use of the LaTeX tables).
 
 > Note: On some devices the failure detection heuristic is not working properly. If you experience a lot of `[MISSING_PAGE]` responses, try to run with the `--no-skipping` flag. Related: [#11](https://github.com/facebookresearch/nougat/issues/11), [#67](https://github.com/facebookresearch/nougat/issues/67)
-
-#### API
-
-With the extra dependencies you use `app.py` to start an API. Call
-
-```sh
-$ nougat_api
-```
-
-To get a prediction of a PDF file by making a POST request to http://127.0.0.1:8503/predict/. It also accepts parameters `start` and `stop` to limit the computation to select page numbers (boundaries are included).
-
-The response is a string with the markdown text of the document.
-
-```sh
-curl -X 'POST' \
-  'http://127.0.0.1:8503/predict/' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'file=@<PDFFILE.pdf>;type=application/pdf'
-```
-To use the limit the conversion to pages 1 to 5, use the start/stop parameters in the request URL: http://127.0.0.1:8503/predict/?start=1&stop=5
-
-## FAQ
-
-- Why am I only getting `[MISSING_PAGE]`?
-
-  Nougat was trained on scientific papers found on arXiv and PMC. Is the document you're processing similar to that?
-  What language is the document in? Nougat works best with English papers, other Latin-based languages might work. **Chinese, Russian, Japanese etc. will not work**.
-  If these requirements are fulfilled it might be because of false positives in the failure detection, when computing on CPU or older GPUs ([#11](https://github.com/facebookresearch/nougat/issues/11)). Try passing the `--no-skipping` flag for now.
-
-- Where can I download the model checkpoint from.
-
-  They are uploaded here on GitHub in the release section. You can also download them during the first execution of the program. Choose the preferred preferred model by passing `--model 0.1.0-{base,small}`
 
 ## Citation
 
