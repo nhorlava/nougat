@@ -5,7 +5,6 @@ From: nvcr.io/nvidia/pytorch:24.07-py3
 echo "Installing Packages"
 git clone https://github.com/nhorlava/nougat.git
 cd nougat
-python setup.py install
 apt-get update
 apt-get -y install poppler-utils
 apt install -y tesseract-ocr
