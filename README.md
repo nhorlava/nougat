@@ -12,6 +12,7 @@
 This is the fork of the official repository for Nougat, the academic document PDF parser that understands LaTeX math and tables.
 Original project page: https://facebookresearch.github.io/nougat/
 
+
 <b>This fork was modified as part of a collaborative project I am contributing to as an employee of the Max Planck Computing and Data Facility (MPCDF). The project involves the following organizations:</b>
 - <img 
      src="https://github.com/user-attachments/assets/3c8d03a8-4a46-4485-837f-f57eb4fd7659" 
