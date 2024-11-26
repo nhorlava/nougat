@@ -13,31 +13,27 @@
 This is the fork of the official repository for Nougat, the academic document PDF parser that understands LaTeX math and tables.
 Original project page: https://facebookresearch.github.io/nougat/
 
-<b> This fork was created as a part of a collaborative project, consisting of the following organizations </b>:
-
- - Max Planck Computing and Data Facility (MPCDF)
- - Max Planck Institute for Research on Collective Goods
-
+<b> This fork is part of a collaborative project I am contributing to as an employee of the Max Planck Computing and Data Facility (MPCDF). The project involves the following organizations: </b>
+- Max Planck Computing and Data Facility (MPCDF)
+- Max Planck Institute for Research on Collective Goods
+  
 <b> Key changes: </b>
-- for pages were original "nougat" tool produced "[MISSING_PAGE]", regular text extraction and `pytesseract` library  was used to recognize text
-  - to run it with this updated functionality, use `--recompute` flag
-- additionally, the repo was containerized using "apptainer"
+- for pages were original "nougat" tool produced "[MISSING_PAGE_*]" error, simpler OCR methods (e.g. `pytesseract` tool)  were used to recognize text.
+- additionally, the repo was containerized using "apptainer". The recipy is located at `container/apptainer/nougat.def`
 
 <b> Example of running: </b>
-` apptainer exec $sif_file nougat $input_path -o "${output_path}-small" --recompute --batchsize 1`
+`apptainer exec $path_to_container nougat $path/to/directory -o output_directory --batchsize 1`
 
 
 ## Install
 
 From repository:
 ```
-pip install git+https://github.com/facebookresearch/nougat
+git clone https://github.com/nhorlava/nougat.git
+cd nougat
+apptainer build --fakeroot nougat.sif container/apptainer/nougat.def
 ```
 
-There are extra dependencies if you want to call the model from an API or generate a dataset.
-Install via
-
-`pip install "nougat-ocr[api]"` or `pip install "nougat-ocr[dataset]"`
 
 ### Get prediction for a PDF
 #### CLI
