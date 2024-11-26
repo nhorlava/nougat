@@ -56,6 +56,11 @@ setup(
         "albumentations>=1.0.0",
         "pypdf>=3.1.0",
         "pypdfium2",
+        "PyPDF2", 
+        "pdfminer", 
+        "pdfplumber", 
+        "pdf2image", 
+        "pytesseract"
     ],
     extras_require={
         "api": [

@@ -6,15 +6,11 @@ echo "Installing Packages"
 git clone https://github.com/nhorlava/nougat.git
 cd nougat
 python setup.py install
-pip install PyPDF2
-pip install pdfminer
-pip install pdfplumber
 apt-get update
 apt-get -y install poppler-utils
-pip install pdf2image
 apt install -y tesseract-ocr
 apt install -y libtesseract-dev
-pip install pytesseract
+python setup.py install
 
 %environment 
 
@@ -23,7 +19,7 @@ pip install pytesseract
 %runscript
 
 %labels
-  author David Carreto Fidalgo
+  author Nastassya Horlava
   version 1.0
 
 %help
