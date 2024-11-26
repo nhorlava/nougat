@@ -26,7 +26,7 @@ Original project page: https://facebookresearch.github.io/nougat/
 - additionally, the repo was containerized using "apptainer". The recipe is located at `container/apptainer/nougat.def`
 
 <b> Example of running: </b>
-`apptainer exec $path_to_container nougat $path/to/directory -o output_directory --batchsize 1`
+`apptainer exec $path_to_container nougat path/to/directory -o output_directory --batchsize 1`
 
 
 ## Install
